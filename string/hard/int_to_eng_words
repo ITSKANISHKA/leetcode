@@ -1,0 +1,69 @@
+import java.util.HashMap;
+
+public class Solution {
+    public String numberToWords(int num) {
+        if (num == 0) return "Zero";
+
+        HashMap<Integer, String> units = new HashMap<>();
+        units.put(1, "One"); units.put(2, "Two"); units.put(3, "Three"); units.put(4, "Four");
+        units.put(5, "Five"); units.put(6, "Six"); units.put(7, "Seven"); units.put(8, "Eight");
+        units.put(9, "Nine"); units.put(10, "Ten"); units.put(11, "Eleven"); units.put(12, "Twelve");
+        units.put(13, "Thirteen"); units.put(14, "Fourteen"); units.put(15, "Fifteen");
+        units.put(16, "Sixteen"); units.put(17, "Seventeen"); units.put(18, "Eighteen");
+        units.put(19, "Nineteen");
+
+        HashMap<Integer, String> tens = new HashMap<>();
+        tens.put(2, "Twenty"); tens.put(3, "Thirty"); tens.put(4, "Forty");
+        tens.put(5, "Fifty"); tens.put(6, "Sixty"); tens.put(7, "Seventy");
+        tens.put(8, "Eighty"); tens.put(9, "Ninety");
+
+        String getHundred(int num) {
+            StringBuilder str = new StringBuilder();
+            if (num >= 100) {
+                int n = num / 100;
+                str.append(" ").append(units.get(n)).append(" Hundred");
+                num %= 100;
+            }
+
+            if (num >= 20) {
+                int n = num / 10;
+                str.append(" ").append(tens.get(n));
+                num %= 10;
+            }
+
+            if (num > 0) {
+                str.append(" ").append(units.get(num));
+            }
+
+            return str.toString().trim();
+        }
+
+        StringBuilder answer = new StringBuilder();
+        if (num >= 1e9) {
+            int n = num / 1e9;
+            answer.append(" ").append(getHundred(n)).append(" Billion");
+            num %= 1e9;
+        }
+
+        if (num >= 1e6) {
+            int n = num / 1e6;
+            answer.append(" ").append(getHundred(n)).append(" Million");
+            num %= 1e6;
+        }
+
+        if (num >= 1e3) {
+            int n = num / 1e3;
+            answer.append(" ").append(getHundred(n)).append(" Thousand");
+            num %= 1e3;
+        }
+
+        answer.append(" ").append(getHundred(num));
+
+        return answer.toString().trim();
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(sol.numberToWords(1234567890));
+    }
+}
