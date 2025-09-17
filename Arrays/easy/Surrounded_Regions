@@ -1,0 +1,73 @@
+class Solution {
+
+    public static void dfs(char[][] board,int row , int col,int vis[][],int n,int m){
+
+          vis[row][col]= 1;
+
+        int deleteRow[] = {-1,0,1,0};
+        int deleteCol[] = {0,1,0,-1};
+
+         for(int i =0;i<4;i++){
+
+            int r = row + deleteRow[i];
+            int c = col + deleteCol[i];
+
+            if(r >=0 && r < n && c >= 0 && c < m)
+            {
+                if((board[r][c] == 'O') && (vis[r][c] == 0))
+                {
+                    dfs(board,r,c,vis,n,m);
+                }
+            }
+        }
+    }
+
+    public void solve(char[][] board) {
+
+        int n = board.length;
+        int m = board[0].length;
+
+        int vis[][] = new int[n][m];
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                vis[i][j] = 0;
+            }
+        }
+
+        //top
+        for(int i=0;i<m;i++){
+           if(board[0][i] == 'O') dfs(board,0,i,vis,n,m);
+        }
+
+        //right
+        for(int i=0;i<n;i++){
+           if(board[i][m-1] == 'O') dfs(board,i,m-1,vis,n,m);
+        }
+
+        //bottom
+        for(int i=0;i<m;i++){
+           if(board[n-1][i] == 'O') dfs(board,n-1,i,vis,n,m);
+        }
+
+        //left
+        for(int i=0;i<n;i++){
+           if(board[i][0] == 'O') dfs(board,i,0,vis,n,m);
+        }
+
+         for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+               if((board[i][j] == 'O') && (vis[i][j] == 0)) board[i][j] = 'X';
+            }
+        }
+    }
+}
+
+/*
+[
+["X","X","X","X"],
+["X","O","O","X"],
+["X","X","O","X"],
+["X","O","X","X"]
+]
+*/
