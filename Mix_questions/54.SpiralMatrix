@@ -1,0 +1,60 @@
+// class Solution {
+//     public List<Integer> spiralOrder(int[][] matrix) {
+//         int n=matrix.length;
+//         int m=matrix[0].length;
+//         int rs=0;
+//         int re=n-1;
+//         int cs=m-1;
+//         int ce=0;
+//         int [] arr=new int[n*m]
+//         for(int i=rs;i<=cs;i++){
+//             arr[i]=arr[ce][i];
+//         }ce++;
+//         for(int i=ce;i<=re;i++){
+//             arr[i]=arr[i][cs];
+//         }cs++;
+//         for(int i=cs;i>=ce;i--){
+//             arr[i]=arr[re][i];
+//         }re--;
+//         for(int i=re;i>=rs;i--){
+//             arr[i]=arr[i][ce];
+//         }ce++;
+
+        
+//     }
+// }
+import java.util.*;
+
+class Solution {
+    public List<Integer> spiralOrder(int[][] matrix) {
+        List<Integer> result = new ArrayList<>();
+        if(matrix == null || matrix.length == 0) return result;
+        int n = matrix.length;
+        int m = matrix[0].length;
+        int rs = 0, re = n - 1;
+        int cs = 0, ce = m - 1;
+        while(rs <= re && cs <= ce) {
+            for(int i = cs; i <= ce; i++) {
+                result.add(matrix[rs][i]);
+            }
+            rs++;
+            for(int i = rs; i <= re; i++) {
+                result.add(matrix[i][ce]);
+            }
+            ce--;
+            if(rs <= re) {
+                for(int i = ce; i >= cs; i--) {
+                    result.add(matrix[re][i]);
+                }
+                re--;
+            }
+            if(cs <= ce) {
+                for(int i = re; i >= rs; i--) {
+                    result.add(matrix[i][cs]);
+                }
+                cs++;
+            }
+        }
+        return result;
+    }
+}
