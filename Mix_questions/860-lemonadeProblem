@@ -1,0 +1,38 @@
+class Solution {
+    public boolean lemonadeChange(int[] nums) {
+        boolean flag=true;
+        int fives=0;
+        int ten=0;
+
+        int n=nums.length;
+        for(int i=0;i<n;i++){
+            if(nums[i]==5){
+                fives++;
+            }else if(nums[i]==10){
+                ten++;
+                // count-=left;
+                if(fives<=0){
+                    return false;
+                }else{
+                    fives--;
+                }
+            }else{
+                if(ten==0){
+                    if(fives<=2){
+                        return false;
+                    }else{
+                        fives-=3;
+                    }
+                }else{
+                     ten--;
+                    if(fives==0)
+                    return false;
+                    else
+                    fives--;
+
+                }
+            }
+        }return true;
+        
+    }
+}
