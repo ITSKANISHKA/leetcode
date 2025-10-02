@@ -1,0 +1,37 @@
+class Solution {
+    public boolean CanPlace(int Force,int [] arr,int m){
+        int prev=arr[0];
+       int  count=1;
+        for(int i=1;i<arr.length;i++){
+            int curr=arr[i];
+            if(curr-prev>=Force){
+                count++;
+                prev=curr;
+            }if(count==m){
+                break;
+            }
+
+        }return count==m;
+    }
+    public int maxDistance(int[] arr, int m) {
+        Arrays.sort(arr);
+        int n=arr.length;
+        int minForce=0;
+        int maxForce=arr[n-1]-arr[0];
+        int ans=0;
+            
+            while(minForce<=maxForce){
+                int midForce=minForce+(maxForce-minForce)/2;
+                if(CanPlace(midForce,arr,m)){
+                    ans=midForce;
+                    minForce=midForce+1;
+
+                }else{
+                    maxForce=midForce-1;
+                }
+            }return ans;
+
+        
+    
+    }
+}
