@@ -1,0 +1,45 @@
+class Solution {
+    private void dfs(int x, int y, int[][] heights, boolean[][] vis) {
+        int n = heights.length;
+        int m = heights[0].length;
+        vis[x][y] = true;
+
+        int[] dx = {-1, 0, 1, 0};
+        int[] dy = {0, 1, 0, -1};
+
+        for (int i = 0; i < 4; i++) {
+            int newX = x + dx[i];
+            int newY = y + dy[i];
+            if (newX >= 0 && newX < n && newY >= 0 && newY < m &&
+                !vis[newX][newY] && heights[newX][newY] >= heights[x][y]) {
+                dfs(newX, newY, heights, vis);
+            }
+        }
+    }
+
+    public List<List<Integer>> pacificAtlantic(int[][] heights) {
+        int n = heights.length;
+        int m = heights[0].length;
+        boolean[][] visP = new boolean[n][m];
+        boolean[][] visA = new boolean[n][m];
+        List<List<Integer>> result = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            dfs(i, 0, heights, visP);       // Pacific
+            dfs(i, m - 1, heights, visA);   // Atlantic
+        }
+        for (int j = 0; j < m; j++) {
+            dfs(0, j, heights, visP);       // Pacific
+            dfs(n - 1, j, heights, visA);   // Atlantic
+        }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                if (visP[i][j] && visA[i][j]) {
+                    result.add(Arrays.asList(i, j));
+                }
+            }
+        }
+        return result;
+    }
+}
