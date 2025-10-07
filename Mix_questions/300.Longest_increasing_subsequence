@@ -1,0 +1,71 @@
+//RECURSION
+class Solution {
+    //int count=0;
+    public int lengthOfLIS(int[] nums) {
+        return Solve(nums,0,0,-1);
+    }
+    public int Solve(int[] nums,int idx,int count,int prev){
+        if(idx==nums.length)return count;
+        int x=Solve(nums,idx+1,count,prev);
+        int y=0;
+        if(prev==-1||nums[idx]>nums[prev]){
+            y =Solve(nums,idx+1,count+1,idx);
+        }return Math.max(x,y);
+    }
+}
+//----------------------------------------------------------------------------------------------------------------------------\\
+//DP
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        int n = nums.length;
+        int[] dp = new int[n];
+        Arrays.fill(dp, 1); // each element is an LIS of length 1
+
+        for(int i = 1; i < n; i++){
+            for(int j = 0; j < i; j++){
+                if(nums[i] > nums[j]){
+                    dp[i] = Math.max(dp[i], dp[j] + 1);
+                }
+            }
+        }
+
+        int maxLen = 0;
+        for(int len : dp){
+            maxLen = Math.max(maxLen, len);
+        }
+        return maxLen;
+    }
+}
+//-------------------------------------------------------------------------------------------------------------------------\\
+//BINARY SEARCH
+import java.util.*;
+
+class Solution {
+    public int lengthOfLIS(int[] nums) {
+        List<Integer> tails = new ArrayList<>();
+
+        for (int num : nums) {
+            int left = 0, right = tails.size() - 1;
+            int pos = tails.size(); 
+
+          
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (tails.get(mid) >= num) {
+                    pos = mid;    
+                    right = mid - 1;
+                } else {
+                    left = mid + 1;
+                }
+            }
+
+            if (pos < tails.size()) {
+                tails.set(pos, num);
+            } else {
+                tails.add(num);   
+            }
+        }
+
+        return tails.size();
+    }
+}
