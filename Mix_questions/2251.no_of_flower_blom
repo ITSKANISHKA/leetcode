@@ -1,0 +1,56 @@
+class Solution {
+    public int[] fullBloomFlowers(int[][] flowers, int[] people) {
+        int n=flowers.length;
+        int m=people.length;
+
+        int[] start=new int[n];
+        int[] die=new int[n];
+        int[] res=new int[m];
+
+        for(int i=0;i<n;i++){
+            start[i]=flowers[i][0];
+            die[i]=flowers[i][1];
+
+        }
+        Arrays.sort(start);
+        Arrays.sort(die);
+        for(int i=0;i<m;i++){
+            int time=people[i];
+            int bloomed=upper_bound(start,time);
+            int dieee=lower_bound(die,time);
+            res[i]=bloomed-dieee;
+        }
+        return res;
+
+        
+    }
+
+    public int upper_bound(int[] arr,int target){
+        int s=0;
+        int e=arr.length;
+        while(s<e){
+            int mid=s+(e-s)/2;
+            //if(arr[mid]==target)return mid;
+            if(arr[mid]<=target){
+                s=mid+1;
+            }else{
+                e=mid;
+            }
+        }return s;
+    }
+
+    public int lower_bound(int[] arr,int target){
+        int s=0;
+        int e=arr.length;
+        while(s<e){
+            int mid=s+(e-s)/2;
+           // if(arr[mid]==target)return mid;
+            if(arr[mid]<target){
+                s=mid+1;
+            }else{
+                e=mid;
+            }
+        }return s;
+    }
+    
+}
