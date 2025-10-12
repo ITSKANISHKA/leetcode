@@ -1,0 +1,28 @@
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>>res=new ArrayList<>();
+        Solve(nums,0,res);
+        return res;
+        
+    }
+    public void Solve(int []nums,int idx,List<List<Integer>> res){
+        if(idx==nums.length){
+            List<Integer> permute=new ArrayList<>();
+            for(int num:nums){
+                permute.add(num);
+            }res.add(permute);
+            return;
+        }
+
+            for(int j=idx;j<nums.length;j++){
+                swap(idx,j,nums);
+                Solve(nums,idx+1,res);
+                swap(idx,j,nums);
+            }
+    }
+    public void swap(int i,int j,int[] nums){
+        int temp=nums[i];
+        nums[i]=nums[j];
+        nums[j]=temp;
+    }
+}
