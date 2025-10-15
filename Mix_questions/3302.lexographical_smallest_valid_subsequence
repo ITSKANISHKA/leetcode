@@ -1,0 +1,17 @@
+class Solution {
+    public int[] validSequence(String w1, String w2) {
+        int n = w1.length(), m = w2.length();
+        int[] res = new int[m], last = new int[n];
+        for(int i = n - 1, index = m - 1; i >= 0; i--) {
+            if(index >= 0 && w1.charAt(i) == w2.charAt(index)) index--;
+            last[i] = m - index - 1;
+        }
+        boolean skip = false;
+        for(int i = 0, index = 0; i <= n; i++) {
+            if(index == m || i == n) return index == m ? res : new int[] {};
+            if(w1.charAt(i) == w2.charAt(index)) res[index++] = i;
+            else if(!skip && (i == n - 1 || last[i+1] >= m - index - 1) && (skip = true)) res[index++] = i;
+        }
+        return new int[] {}; 
+    }
+}
