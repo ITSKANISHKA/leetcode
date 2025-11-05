@@ -1,0 +1,91 @@
+import java.util.*;
+
+class Solution {
+    public long[] findXSum(int[] nums, int k, int x) {
+        Map<Integer, Integer> freq = new HashMap<>();
+        Comparator<Integer> comp = (a, b) -> {
+            int fa = freq.getOrDefault(a, 0);
+            int fb = freq.getOrDefault(b, 0);
+            if (fa != fb) return Integer.compare(fb, fa);
+            return Integer.compare(b, a);
+        };
+        TreeSet<Integer> top = new TreeSet<>(comp);
+        TreeSet<Integer> rest = new TreeSet<>(comp);
+        long sumTop = 0;
+        int n = nums.length;
+        long[] ans = new long[n - k + 1];
+
+        for (int i = 0; i < n; ++i) {
+            int v = nums[i];
+            if (freq.containsKey(v)) {
+                if (top.remove(v)) {
+                    sumTop -= (long) freq.get(v) * v;
+                } else {
+                    rest.remove(v);
+                }
+                freq.put(v, freq.get(v) + 1);
+            } else {
+                freq.put(v, 1);
+            }
+            rest.add(v);
+
+            while (top.size() < x && !rest.isEmpty()) {
+                int cand = rest.first();
+                rest.remove(cand);
+                top.add(cand);
+                sumTop += (long) freq.get(cand) * cand;
+            }
+            while (!top.isEmpty() && !rest.isEmpty()) {
+                int bestRest = rest.first();
+                int worstTop = top.last();
+                if (comp.compare(bestRest, worstTop) < 0) {
+                    rest.remove(bestRest);
+                    top.remove(worstTop);
+                    sumTop -= (long) freq.get(worstTop) * worstTop;
+                    top.add(bestRest);
+                    sumTop += (long) freq.get(bestRest) * bestRest;
+                    rest.add(worstTop);
+                } else break;
+            }
+
+            if (i >= k) {
+                int out = nums[i - k];
+                if (freq.containsKey(out)) {
+                    if (top.remove(out)) {
+                        sumTop -= (long) freq.get(out) * out;
+                    } else {
+                        rest.remove(out);
+                    }
+                    int nf = freq.get(out) - 1;
+                    if (nf == 0) {
+                        freq.remove(out);
+                    } else {
+                        freq.put(out, nf);
+                        rest.add(out);
+                    }
+                    while (top.size() < x && !rest.isEmpty()) {
+                        int cand = rest.first();
+                        rest.remove(cand);
+                        top.add(cand);
+                        sumTop += (long) freq.get(cand) * cand;
+                    }
+                    while (!top.isEmpty() && !rest.isEmpty()) {
+                        int bestRest = rest.first();
+                        int worstTop = top.last();
+                        if (comp.compare(bestRest, worstTop) < 0) {
+                            rest.remove(bestRest);
+                            top.remove(worstTop);
+                            sumTop -= (long) freq.get(worstTop) * worstTop;
+                            top.add(bestRest);
+                            sumTop += (long) freq.get(bestRest) * bestRest;
+                            rest.add(worstTop);
+                        } else break;
+                    }
+                }
+            }
+
+            if (i >= k - 1) ans[i - k + 1] = sumTop;
+        }
+        return ans;
+    }
+}
