@@ -8,4 +8,4 @@ class Solution {
         else return true;
 
     }
-}
+}//O(n)
