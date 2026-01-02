@@ -1,12 +1,4 @@
 class Solution {
-    class Pair{
-        int row;
-        int col;
-        Pair(int row,int col){
-            this.row=row;
-            this.col=col;
-        }
-    }
     public int count(int rw,int cl,int[][] grid){
         if(rw<0 || cl<0 || rw>=grid.length|| cl>=grid[0].length|| grid[rw][cl]==0 )return 0;
         grid[rw][cl]=0;
