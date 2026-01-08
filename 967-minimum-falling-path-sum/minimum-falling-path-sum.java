@@ -20,7 +20,6 @@ class Solution {
         if(dp[i][j]!=-1000000){
             return dp[i][j];
         }
-
         int down=Min_Falling(mat,i+1,j,dp);
         //int right=Min_Falling(mat,i,j+1,dp);
         int ld=Min_Falling(mat,i+1,j-1,dp);
