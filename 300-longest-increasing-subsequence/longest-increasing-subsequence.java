@@ -1,5 +1,4 @@
 class Solution {
-
     public int lengthOfLIS(int[] arr) {
         if (arr == null || arr.length == 0) return 0;
         int[] dp = new int[arr.length];
