@@ -1,13 +1,5 @@
 class Solution {
     public int minOperations(int[] nums) {
-        // int sum=0;
-        // int len=nums.length;
-        // for(int i=0;i<nums.length;i++){
-        //     if(nums[i]==1){
-        //         sum+=nums[i];
-        //     }
-        // }
-        // return len-sum;
         int len=nums.length;
         int k=0;
         for(int i=0;i<len-2;i++){
@@ -20,6 +12,10 @@ class Solution {
         }
         for(int num:nums){
                 if(num==0)return -1;
-            }return k;
+            }
+            // if(nums[len-1]==0 || nums[len-2]==0){
+            // return -1;
+    //}
+    return k;
         }
 }
