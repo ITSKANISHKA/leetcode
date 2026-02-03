@@ -10,12 +10,9 @@ class Solution {
                 k++;
             }
         }
-        for(int num:nums){
-                if(num==0)return -1;
-            }
-            // if(nums[len-1]==0 || nums[len-2]==0){
-            // return -1;
-    //}
+            if(nums[len-1]==0 || nums[len-2]==0){
+            return -1;
+    }
     return k;
         }
 }
