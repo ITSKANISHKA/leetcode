@@ -19,13 +19,6 @@ class Solution {
     }
     public boolean Solve(TreeNode root,TreeNode left,TreeNode right){
         if(root==null)return true;
-        // TreeNode leftNode=isValidBST(root.left);
-        // TreeNode rightNode=isValidBST(root.right);
-
-        // if(root>leftNode && root<rightNode)return true;
-        // else {
-        //     return false;
-        // }
         if(left!=null && root.val<=left.val){
             return false;
         }
