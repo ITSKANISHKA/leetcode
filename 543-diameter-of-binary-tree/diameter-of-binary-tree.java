@@ -25,7 +25,5 @@ class Solution {
         int rightNode=height(root.right);
         dia=Math.max(dia,leftNode+rightNode);
         return 1+Math.max(leftNode,rightNode);
-
-        
     }
 }
