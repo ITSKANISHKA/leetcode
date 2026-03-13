@@ -15,17 +15,16 @@
  */
 class Solution {
     public boolean isValidBST(TreeNode root) {
-        return Solve(root,null,null);
+       return func(root,null,null);
     }
-    public boolean Solve(TreeNode root,TreeNode left,TreeNode right){
+    public static boolean func(TreeNode root,TreeNode left,TreeNode right){
         if(root==null)return true;
-        if(left!=null && root.val<=left.val){
+        if(left!=null && left.val>=root.val){
             return false;
         }
-        if(right != null && root.val>=right.val){
+        if(right!=null && right.val <=root.val){
             return false;
         }
-        return Solve(root.left,left,root) && Solve(root.right,root,right);
-        
+        return func(root.left,left,root) && func(root.right,root,right);
     }
 }
