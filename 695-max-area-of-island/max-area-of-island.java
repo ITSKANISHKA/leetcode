@@ -1,15 +1,16 @@
 class Solution {
     public int count(int rw,int cl,int[][] grid){
-        if(rw<0 || cl<0 || rw>=grid.length|| cl>=grid[0].length|| grid[rw][cl]==0 )return 0;
+        if(rw<0|| cl<0 || rw>=grid.length || cl>=grid[0].length||grid[rw][cl] == 0)return 0;
+        int area=1;
         grid[rw][cl]=0;
-        int count1=1;
-        int[] dR={-1,1,0,0};
-        int[] dC={0,0,-1,1};
+        int[] dr={0,0,1,-1};
+        int[] dc={1,-1,0,0};
+
         for(int i=0;i<4;i++){
-            int newR=rw+dR[i];
-            int newC=cl+dC[i];
-            count1+=count(newR,newC,grid);
-        }return count1;
+            int newR=rw+dr[i];
+            int newC=cl+dc[i];
+            area+=count(newR,newC,grid);
+        }return area;
     }
     public int maxAreaOfIsland(int[][] grid) {
         int result=0;
