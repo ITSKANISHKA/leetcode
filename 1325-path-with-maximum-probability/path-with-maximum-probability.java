@@ -8,7 +8,6 @@ class Solution {
                 int src = edges[j][0]; 
                 int dest = edges[j][1];
                 double prob = succProb[j];
-
                 if(probs[src] * prob > probs[dest]) {
                     probs[dest] = probs[src] * prob;
                     change = true;
@@ -22,5 +21,5 @@ class Solution {
         }
         return probs[end_node];
     }
-    }
+}
     
