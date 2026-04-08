@@ -11,6 +11,5 @@ class Solution {
         int two=Solve(n-2,dp);
         dp[n]=one+two;
         return dp[n];
-
     }
 }
