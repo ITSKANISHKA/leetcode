@@ -5,17 +5,12 @@ class Solution {
     int profit = 0;
 
     while(i < n-1){
-
         while(i < n-1 && arr[i] >= arr[i+1])
             i++;
-
         int buy = arr[i];
-
         while(i < n-1 && arr[i] <= arr[i+1])
             i++;
-
         int sell = arr[i];
-
         profit += sell - buy;
     }
 
