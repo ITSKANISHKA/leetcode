@@ -4,12 +4,11 @@ class Solution {
         int min=Integer.MAX_VALUE;
         int max=0;
         for(int i=0;i<n;i++){
-            if(min>prices[i]){
+            if(prices[i]<min){
                 min=prices[i];
             }else if(max<prices[i]-min){
                 max=prices[i]-min;
-
             }
-        }    return max;    
+        }return max;
     }
 }
