@@ -1,22 +1,15 @@
 class Solution {
     public int getCommon(int[] nums1, int[] nums2) {
-        int n = nums1.length;
-        int m = nums2.length;
-        // int j=0;
-        int count=0;
-        int min=Integer.MAX_VALUE;
-        int j=0;
-        int i=0;
-        while (i < nums1.length && j < nums2.length) {
-            if (nums1[i]== nums2[j]) {
-                return nums1[i];
-            } 
-            else if (nums1[i] < nums2[j]) {
-                i++;
-            } 
-            else {
-                j++;
+        HashSet<Integer> set2 = new HashSet<>();
+        for(int a : nums2){
+            set2.add(a);
+        }
+        int min = Integer.MAX_VALUE;
+        for(int i : nums1){
+            if(set2.contains(i)){
+                min=Math.min(min, i);
             }
-        }return -1;  
-    }//O(n+m)-->two pointer
+        }
+        return min == Integer.MAX_VALUE ? -1 : min;
+    }
 }
