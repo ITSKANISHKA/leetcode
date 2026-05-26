@@ -1,21 +1,17 @@
 class Solution {
     public int numberOfSpecialChars(String word) {
-        HashSet<Character> small=new HashSet<>();
-        HashSet<Character> cap=new HashSet<>();
-        HashSet<Character> valid=new HashSet<>();
-        for (char ch:word.toCharArray()) {
-            if (Character.isLowerCase(ch)) {
-                small.add(ch);
-            } else if (Character.isUpperCase(ch)) {
-                cap.add(ch);
+        int lower = 0;
+        int upper = 0;
+
+        for(char ch : word.toCharArray()) {
+            if(Character.isLowerCase(ch)) {
+                lower |= (1 << (ch - 'a'));
+            }
+            else {
+                upper |= (1 << (ch - 'A'));
             }
         }
-        for (char low:small) {
-            char up=Character.toUpperCase(low);
-            if (cap.contains(up)) {
-                valid.add(low); 
-            }
-        }
-        return valid.size();
+        int common = lower & upper;
+        return Integer.bitCount(common);
     }
 }
