@@ -1,4 +1,4 @@
-# LeetCode Solutions
+# LeetCode Solutions 👾
 
 ## Overview
 
@@ -12,7 +12,7 @@ The main objective of this repository is to maintain a structured collection of 
 
 Each solution focuses on writing optimized code with proper time and space complexity analysis while exploring multiple approaches wherever applicable.
 
-## Topics Covered
+## Topics Covered 😎
 
 - Arrays & Strings
 - Linked Lists
