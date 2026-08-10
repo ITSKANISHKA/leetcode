@@ -28,6 +28,6 @@ Each solution focuses on writing optimized code with proper time and space compl
 - Greedy Algorithms
 - Bit Manipulation
 
-## Goal
+## Goal 🥰
 
 To consistently practice Data Structures and Algorithms, improve logical thinking, and build strong foundations for software engineering interviews.
