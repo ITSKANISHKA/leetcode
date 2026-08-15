@@ -1,0 +1,11 @@
+class Solution {
+    public int elevatorRequests(int n, int[] requests) {
+        int curr = 0;
+        int tt = 0;
+        for (int floor : requests) {
+            tt+= Math.abs(curr - floor);
+            curr = floor;
+        }
+        return tt;
+    }
+}
