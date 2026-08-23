@@ -1,0 +1,18 @@
+class Solution {
+    public int[] sortArrayByParity(int[] nums) {
+        int n=nums.length;
+        int[] arr=new int[n];
+        int even=0;
+        int odd=n-1;
+        for(int num:nums){
+            if(num%2==0){
+                arr[even]=num;
+                even++;
+            }else{
+                arr[odd]=num;
+                odd--;
+        }
+        }return arr;
+        
+    }
+}
