@@ -1,6 +1,5 @@
 # LeetCode Solutions 👾
 
-## Overview
 
 This repository contains my solutions to various **LeetCode problems** focused on improving problem-solving skills, strengthening data structures and algorithms concepts, and developing efficient coding approaches.
 
